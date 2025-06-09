@@ -406,9 +406,6 @@
     </header>
 
     <div class="wrap">
-        <!-- <div class="logo">
-            🍜 RamenRoad
-        </div> -->
         <div class="main1">
 
             <div class="productsetname">
@@ -628,22 +625,6 @@
         $(document).on('click', '.btn-delete', function () {
             $(this).closest('.cart-item').remove();
         });
-
-        // const decrementBtn = document.querySelector('.decrement');
-        // const incrementBtn = document.querySelector('.increment');
-        // const quantityInput = document.querySelector('.quantity');
-
-        // decrementBtn.addEventListener('click', () => {
-        //     let current = parseInt(quantityInput.value, 10);
-        //     if (current > 1) {
-        //         quantityInput.value = current - 1;
-        //     }
-        // });
-
-        // incrementBtn.addEventListener('click', () => {
-        //     let current = parseInt(quantityInput.value, 10);
-        //     quantityInput.value = current + 1;
-        // });
 
         document.querySelectorAll('.decrement').forEach(btn => {
             btn.addEventListener('click', function () {
