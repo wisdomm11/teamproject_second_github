@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍜RamenRoad - 회원가입</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff5722);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .signup-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            color: #ff4757;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #ff4757;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            margin: 25px 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: #e9ecef;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            accent-color: #ff4757;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .required {
+            color: #ff4757;
+            font-weight: bold;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 71, 87, 0.4);
+        }
+
+        .signup-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #ff4757;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #ff3742;
+            text-decoration: underline;
+        }
+
+        .ramen-decoration {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .ramen-1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .ramen-2 {
+            top: 20%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .ramen-3 {
+            bottom: 30%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @media (max-width: 480px) {
+            .signup-container {
+                padding: 30px 25px;
+                margin: 10px;
+            }
+            
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        .password-strength {
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e1e5e9;
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            background: #ff4757;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="ramen-decoration ramen-1">🍜</div>
+    <div class="ramen-decoration ramen-2">🥢</div>
+    <div class="ramen-decoration ramen-3">🌶️</div>
+
+    <div class="signup-container">
+        <div class="logo">
+            <h1>🍜RamenRoad</h1>
+            <p>라면의 모든 것이 여기에</p>
+        </div>
+
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="userId">아이디 <span class="required">*</span></label>
+                <input type="text" id="userId" name="userId" required placeholder="영문, 숫자 조합 6-20자">
+            </div>
+
+            <div class="form-group">
+                <label for="password">비밀번호 <span class="required">*</span></label>
+                <input type="password" id="password" name="password" required placeholder="영문, 숫자, 특수문자 조합 8자 이상">
+                <div class="password-strength">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <span id="strengthText">비밀번호 강도를 확인하세요</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">비밀번호 확인 <span class="required">*</span></label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="비밀번호를 다시 입력하세요">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">이름 <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="실명을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="nickname">닉네임</label>
+                    <input type="text" id="nickname" name="nickname" placeholder="라면킹">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">이메일 <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="example@ramenroad.com">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">휴대폰 번호 <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678">
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">생년월일</label>
+                    <input type="date" id="birthdate" name="birthdate">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">주소</label>
+                <input type="text" id="address" name="address" placeholder="배송지 주소">
+            </div>
+
+            <div class="form-group">
+                <label for="favoriteRamen">선호하는 라면 종류</label>
+                <select id="favoriteRamen" name="favoriteRamen">
+                    <option value="">선택해주세요</option>
+                    <option value="spicy">매운맛</option>
+                    <option value="mild">순한맛</option>
+                    <option value="seafood">해물맛</option>
+                    <option value="beef">소고기맛</option>
+                    <option value="chicken">닭고기맛</option>
+                    <option value="cheese">치즈맛</option>
+                    <option value="premium">프리미엄</option>
+                </select>
+            </div>
+
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">🍜RamenRoad 이용약관 동의 <span class="required">(필수)</span></label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="privacy" name="privacy" required>
+                    <label for="privacy">개인정보 수집 및 이용 동의 <span class="required">(필수)</span></label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="marketing" name="marketing">
+                    <label for="marketing">마케팅 정보 수신 동의 (선택)</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="sms" name="sms">
+                    <label for="sms">SMS/알림톡 수신 동의 (선택)</label>
+                </div>
+            </div>
+
+            <button type="submit" class="signup-btn">🍜 라면로드 회원가입</button>
+        </form>https://www.instagram.com/direct/inbox/
+
+        <div class="login-link">
+            이미 회원이신가요? <a href="./Login.html">로그인하기</a>
+            <a href="./Login.html"></a>
+        </div>
+    </div>
+
+    <script>
+        // 비밀번호 강도 체크
+        const passwordInput = document.getElementById('password');
+        const strengthFill = document.getElementById('strengthFill');
+        const strengthText = document.getElementById('strengthText');
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strength = checkPasswordStrength(password);
+            
+            strengthFill.style.width = strength.percent + '%';
+            strengthFill.style.background = strength.color;
+            strengthText.textContent = strength.text;
+        });
+
+        function checkPasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^a-zA-Z0-9]/.test(password)) score++;
+
+            const levels = [
+                { percent: 20, color: '#ff4757', text: '매우 약함' },
+                { percent: 40, color: '#ff6b35', text: '약함' },
+                { percent: 60, color: '#ffa726', text: '보통' },
+                { percent: 80, color: '#66bb6a', text: '강함' },
+                { percent: 100, color: '#4caf50', text: '매우 강함' }
+            ];
+
+            return levels[score - 1] || { percent: 0, color: '#e1e5e9', text: '비밀번호를 입력하세요' };
+        }
+
+        // 비밀번호 확인
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        confirmPasswordInput.addEventListener('input', function() {
+            const password = passwordInput.value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.style.borderColor = '#ff4757';
+            } else {
+                this.style.borderColor = '#e1e5e9';
+            }
+        });
+
+        // 폼 제출 처리
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // 필수 약관 동의 확인
+            if (!data.terms || !data.privacy) {
+                alert('필수 약관에 동의해주세요.');
+                return;
+            }
+            
+            // 비밀번호 확인
+            if (data.password !== data.confirmPassword) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+            
+            // 회원가입 성공 메시지
+            alert('🍜 라면로드에 오신 것을 환영합니다!\n회원가입이 완료되었습니다.');
+            console.log('회원가입 데이터:', data);
+        });
+
+        // 전화번호 자동 하이픈 추가
+        document.getElementById('phone').addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9]/g, '');
+            if (value.length >= 3 && value.length <= 7) {
+                value = value.replace(/(\d{3})(\d+)/, '$1-$2');
+            } else if (value.length >= 8) {
+                value = value.replace(/(\d{3})(\d{4})(\d+)/, '$1-$2-$3');
+            }
+            this.value = value;
+        });
+    </script>
+</body>
+</html>
