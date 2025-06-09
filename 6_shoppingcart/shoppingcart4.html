@@ -626,7 +626,8 @@
             $(this).closest('.cart-item').remove();
         });
 
-        document.querySelectorAll('.decrement').forEach(btn => {
+        document.querySelectorAll('.decrement').forEach(
+        btn => {
             btn.addEventListener('click', function () {
                 const input = this.nextElementSibling;
                 let current = parseInt(input.value, 10);
@@ -634,7 +635,8 @@
                     input.value = current - 1;
                 }
             });
-        });
+        }
+        );
 
         document.querySelectorAll('.increment').forEach(btn => {
             btn.addEventListener('click', function () {
